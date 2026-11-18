@@ -61,7 +61,7 @@
       color: var(--text-primary);
       line-height: 1.5;
       overflow-x: hidden;
-      padding-bottom: calc(var(--player-height) + 28px);
+      padding-bottom: calc(var(--player-height) + 64px);
       min-height: 100vh;
     }
 
@@ -131,24 +131,29 @@
        HERO
        ============================================================ */
     .hero {
-      position: relative;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 60px 28px 50px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 44px;
-      overflow: hidden;
-      min-height: 400px;
-    }
-    .hero-content { position: relative; z-index: 2; flex: 1; max-width: 560px; }
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 28px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 0;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
     .hero-title {
       font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+      text-align: center;
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.05;
-      margin-bottom: 16px;
+      margin-bottom: 19px;
       background: linear-gradient(135deg, #ffffff 0%, var(--yellow) 55%, var(--red) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -158,7 +163,9 @@
     .hero-subtitle {
       font-size: clamp(0.95rem, 1.5vw, 1.15rem);
       color: var(--text-secondary);
-      margin-bottom: 32px;
+      text-align: center;
+  margin-bottom: 0;
+      margin-bottom: 0;
       font-weight: 400;
       letter-spacing: 0.01em;
       animation: heroFadeIn 1s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -286,7 +293,7 @@
     .music-section {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 40px 28px 20px;
+      padding: 18px 28px 20px;
       position: relative;
       z-index: 2;
     }
@@ -412,15 +419,9 @@
       opacity: 0;
       transition: opacity var(--transition);
     }
-    .music-card:hover .card-art::after {
-      opacity: 1;
-      animation: rotateSlow 6s linear infinite;
-    }
-    .music-card.playing .card-art { animation: spinArt 10s linear infinite; }
-    .music-card.playing .card-art::after {
-      opacity: 1;
-      animation: rotateSlow 6s linear infinite;
-    }
+   
+    
+    
     @keyframes spinArt { to { transform: rotate(360deg); } }
 
     .card-info { display: flex; flex-direction: column; gap: 3px; }
@@ -517,6 +518,28 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .card-art img,
+.player-art img,
+.dl-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
+.player-art,
+.dl-art {
+  overflow: hidden;
+}
+
+
+
+.lighting-effect i {
+  font-size: 45px;
+  color: #fff3a0;
+  text-shadow: 0 0 10px #ffcc33, 0 0 30px #ff5500;
+}
 
     /* ============================================================
        DOWNLOADS
@@ -524,7 +547,7 @@
     .downloads-section {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 40px 28px 80px;
+      padding: 40px 28px 160px;
       position: relative;
       z-index: 2;
     }
@@ -659,21 +682,48 @@
       box-shadow: 0 0 24px var(--red-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
       transition: transform var(--transition);
     }
-    .player-art.spinning { animation: spinArt 8s linear infinite; }
-    .player-meta { display: flex; flex-direction: column; min-width: 0; }
-    .player-title {
-      font-weight: 700;
-      font-size: 0.94rem;
+   
+    .player-meta {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      min-width: 0;
+      width: 0;
+      overflow: hidden;
+      gap: 3px;
+    }
+    .player-title,
+    .player-artist {
+      display: block;
+      position: relative;
+      width: 100%;
+      min-width: 0;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
     }
+    .player-title { font-weight: 700; font-size: 0.94rem; }
     .player-artist {
       font-size: 0.78rem;
       color: var(--text-secondary);
-      white-space: nowrap;
-      overflow: hidden;
       text-overflow: ellipsis;
+    }
+    .player-title .marquee-track {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      white-space: nowrap;
+    }
+    .player-title .marquee-copy {
+      display: inline-block;
+      padding-left: 36px;
+    }
+    .player-title.is-overflowing.is-playing .marquee-track {
+      animation: player-marquee 12s linear infinite;
+      will-change: transform;
+    }
+    @keyframes player-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     .player-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
@@ -888,7 +938,7 @@
     }
 
     @media (max-width: 860px) {
-      .hero { flex-direction: column; text-align: center; padding-top: 48px; }
+      .hero { flex-direction: row; text-align: left; padding-top: 28px; }
       .hero-content { max-width: 100%; }
       .equalizer { justify-content: center; }
       .hero-art-inner { width: 170px; }
@@ -904,10 +954,10 @@
 
     @media (max-width: 640px) {
       .banner-header { padding: 12px 16px 0; }
-      .hero { padding: 40px 20px 32px; min-height: 340px; }
+      .hero { padding: 28px 20px 12px; min-height: 0; }
       .hero-art-inner { width: 140px; }
       .music-section { padding: 30px 18px 16px; }
-      .music-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+      .music-grid { grid-template-columns: 1fr; gap: 14px; }
       .music-card { padding: 14px; border-radius: 18px; }
       .card-art { font-size: 2rem; border-radius: 12px; }
       .card-title { font-size: 0.88rem; }
@@ -917,24 +967,60 @@
         width: calc(100% - 20px);
         border-radius: var(--radius-lg);
       }
-      .player-inner { padding: 10px 14px; height: 80px; gap: 10px; }
+      .player-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto;
+        align-items: center;
+        padding: 10px 12px;
+        height: auto;
+        min-height: 92px;
+        gap: 8px 10px;
+      }
+      .player-song {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex: initial;
+        min-width: 0;
+        width: 100%;
+        gap: 10px;
+      }
+      .player-meta { flex: 1 1 0; width: 0; min-width: 0; }
       .player-art { width: 44px; height: 44px; font-size: 1.1rem; border-radius: 13px; }
       .player-title { font-size: 0.8rem; }
       .player-artist { font-size: 0.68rem; }
-      .player-song { flex: 0 0 110px; }
-      .ctrl-btn { width: 34px; height: 34px; font-size: 0.82rem; }
-      .play-btn { width: 44px; height: 44px; font-size: 1rem; }
+      .player-controls {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 2px;
+        flex-shrink: 0;
+      }
+      .ctrl-btn { width: 32px; height: 34px; font-size: 0.78rem; }
+      .play-btn { width: 42px; height: 42px; font-size: 1rem; }
+      .player-progress {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        display: flex;
+        width: 100%;
+        min-width: 0;
+        flex: initial;
+      }
       .player-progress span { font-size: 0.62rem; width: 30px; }
       .toast { font-size: 0.78rem; padding: 12px 22px; white-space: normal; text-align: center; max-width: 90vw; }
       .section-header h2 { font-size: 1.2rem; }
-      .downloads-section { padding: 30px 18px 100px; }
+      .downloads-section { padding: 30px 18px 150px; }
     }
 
     @media (max-width: 420px) {
-      .music-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .player-song { flex: 0 0 90px; }
+      .music-grid { grid-template-columns: 1fr; gap: 12px; }
+      .player-song { min-width: 0; }
       .player-art { width: 38px; height: 38px; }
       .player-title { font-size: 0.72rem; }
+      .player-controls .ctrl-btn { width: 29px; }
+      .player-controls .play-btn { width: 38px; height: 38px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -969,23 +1055,17 @@
   </header>
 
   <!-- ==================== MAIN ==================== -->
-  <main class="main">
-    <!-- HERO -->
-    <section class="hero" id="heroSection">
-      <div class="hero-content">
-        <h1 class="hero-title">Feel Every Beat.</h1>
-        <p class="hero-subtitle">Your music. Your mood. Your moment.</p>
-        <button class="btn-primary" id="exploreBtn">Explore Music <i class="fas fa-arrow-right"></i></button>
-        <div class="equalizer" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-      </div>
-      <div class="hero-art">
-        <div class="hero-art-inner">
-          <i class="fas fa-compact-disc"></i>
-        </div>
-      </div>
-    </section>
+  
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="hero-content">
+    <h1 class="hero-title">வீரத்தின் வித்துக்கள்</h1>
+    <p class="hero-subtitle">
+      |  பாகம் - 2    |    2026 |
+    </p>
+  </div>
+</section>
+
 
     <!-- MUSIC COLLECTION -->
     <section class="music-section" id="musicSection">
@@ -1053,25 +1133,36 @@
     /* ============================================================
        SONG DATA — LOCAL WAV FILES
        ============================================================ */
-    const SONGS = [
-      { id: 1, title: 'Midnight Dreams', artist: 'Aurora Lane', duration: '3:42', artIcon: 'fa-moon',
-        audioUrl: 'Poovoodu Kathei 2TRK_Master_wav.wav', filename: 'midnight-dreams.wav' },
-      { id: 2, title: 'Neon Lights', artist: 'Neon Pulse', duration: '2:58', artIcon: 'fa-bolt',
-        audioUrl: 'VIDUDHALAI SOORIYAN MIX 2.wav', filename: 'neon-lights.wav' },
-      { id: 3, title: 'Lost in Paradise', artist: 'Velvet Sky', duration: '4:15', artIcon: 'fa-umbrella-beach',
-        audioUrl: 'களுத்தில் நஞ்சை.wav', filename: 'lost-in-paradise.wav' },
-      { id: 4, title: 'Ocean Waves', artist: 'Blue Horizon', duration: '3:21', artIcon: 'fa-water',
-        audioUrl: 'சுடரேற்றுவோம் நினைவுச் சுடர் ஏற்றுவோம்.wav', filename: 'ocean-waves.wav' },
-      { id: 5, title: 'Electric Heart', artist: 'Volt Age', duration: '3:05', artIcon: 'fa-heart',
-        audioUrl: 'தேசத்தை நேசித்த.wav', filename: 'electric-heart.wav' },
-      { id: 6, title: 'Moonlight Vibes', artist: 'Lunar Echo', duration: '3:50', artIcon: 'fa-star',
-        audioUrl: 'புலர்கின்ற பொழுதெல்லாம் தலைவா.wav', filename: 'moonlight-vibes.wav' },
-      { id: 7, title: 'Endless Journey', artist: 'Path Finder', duration: '4:33', artIcon: 'fa-road',
-        audioUrl: 'வீரமா கடலே.wav', filename: 'endless-journey.wav' },
-      { id: 8, title: 'Golden Memories', artist: 'Summer Gold', duration: '3:12', artIcon: 'fa-sun',
-        audioUrl: 'வீரவணக்கம் வீரவணக்கம்.wav', filename: 'golden-memories.wav' }
-    ];
+       const ART_IMAGE = 'karthikai.jpg';
 
+const SONGS = [
+  { id: 1, title: 'Midnight Dreams', artist: 'Aurora Lane', duration: '3:42', artIcon: ART_IMAGE,
+    audioUrl: 'Poovoodu Kathei 2TRK_Master_wav.wav', filename: 'midnight-dreams.wav' },
+
+  { id: 2, title: 'Neon Lights', artist: 'Neon Pulse', duration: '2:58', artIcon: ART_IMAGE,
+    audioUrl: 'VIDUDHALAI SOORIYAN MIX 2.wav', filename: 'neon-lights.wav' },
+
+  { id: 3, title: 'Lost in Paradise', artist: 'Velvet Sky', duration: '4:15', artIcon: ART_IMAGE,
+    audioUrl: 'களுத்தில் நஞ்சை.wav', filename: 'lost-in-paradise.wav' },
+
+  { id: 4, title: 'Ocean Waves', artist: 'Blue Horizon', duration: '3:21', artIcon: ART_IMAGE,
+    audioUrl: 'சுடரேற்றுவோம் நினைவுச் சுடர் ஏற்றுவோம்.wav', filename: 'ocean-waves.wav' },
+
+  { id: 5, title: 'தேசத்தை நேசித்த தேசியவீரர்கள்..', artist: 'வரிகள் - உரும்பையூரான் </br> பாடியவர்கள் - இசைப்பறவை கரோலின் </br> V.s ஜெயன்  </br> இசை-ஐவறி அகஸ்ரின்.', duration: '3:05', artIcon: ART_IMAGE,
+    audioUrl: 'தேசத்தை நேசித்த.wav', filename: 'electric-heart.wav' },
+
+  { id: 6, title: 'Moonlight Vibes', artist: 'Lunar Echo', duration: '3:50', artIcon: ART_IMAGE,
+    audioUrl: 'புலர்கின்ற பொழுதெல்லாம் தலைவா.wav', filename: 'moonlight-vibes.wav' },
+
+  { id: 7, title: 'Endless Journey', artist: 'Path Finder', duration: '4:33', artIcon: ART_IMAGE,
+    audioUrl: 'வீரமா கடலே.wav', filename: 'endless-journey.wav' },
+
+  { id: 8, title: 'Golden Memories', artist: 'Summer Gold', duration: '3:12', artIcon: ART_IMAGE,
+    audioUrl: 'வீரவணக்கம் வீரவணக்கம்.wav', filename: 'golden-memories.wav' },
+
+    { id: 9, title: 'Golden Memories', artist: 'Summer Gold', duration: '3:12', artIcon: ART_IMAGE,
+    audioUrl: 'வீரவணக்கம் வீரவணக்கம்.wav', filename: 'golden-memories.wav' }
+];
     /* ============================================================
        STATE
        ============================================================ */
@@ -1113,7 +1204,6 @@
     const sortBtn = $('#sortBtn');
     const filterFavBtn = $('#filterFavBtn');
     const downloadsList = $('#downloadsList');
-    const exploreBtn = $('#exploreBtn');
 
     /* ============================================================
        UTILITIES
@@ -1157,14 +1247,14 @@
       const songs = getFilteredSongs();
       musicGrid.innerHTML = '';
 
-      if (songs.length === 0) {
-        musicGrid.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-search"></i>
-            No songs found. Try a different search or filter.
-          </div>`;
-        return;
-      }
+    if (songs.length === 0) {
+  musicGrid.innerHTML = `
+    <div class="empty-state">
+      <i class="fas fa-music"></i>
+      No songs found.
+    </div>`;
+  return;
+}
 
       songs.forEach((song, i) => {
         const isPlaying = state.isPlaying && state.currentSongIndex === SONGS.indexOf(song);
@@ -1177,7 +1267,9 @@
         card.dataset.songId = song.id;
 
         card.innerHTML = `
-          <div class="card-art"><i class="fas ${song.artIcon}"></i></div>
+         <div class="card-art">
+  <img src="./karthikai.jpg" alt="Karthikai flower">
+</div>
           <div class="card-info">
             <div class="card-title" title="${song.title}">${song.title}</div>
             <div class="card-artist" title="${song.artist}">${song.artist}</div>
@@ -1213,6 +1305,50 @@
       });
     }
 
+    /* Keep long track names inside the metadata area; never over the controls. */
+    function setPlayerMarquee(element, value) {
+      const cleanValue = String(value || '—');
+      element.dataset.trackText = cleanValue;
+      element.setAttribute('aria-label', cleanValue);
+
+      // Only the song title scrolls. The artist remains still below it.
+      if (element !== playerTitle) {
+        element.textContent = cleanValue;
+        element.classList.remove('is-overflowing');
+        return;
+      }
+
+      const track = document.createElement('span');
+      track.className = 'marquee-track';
+
+      const firstCopy = document.createElement('span');
+      firstCopy.textContent = cleanValue;
+      const secondCopy = document.createElement('span');
+      secondCopy.className = 'marquee-copy';
+      secondCopy.textContent = cleanValue;
+      secondCopy.setAttribute('aria-hidden', 'true');
+
+      track.append(firstCopy, secondCopy);
+      element.replaceChildren(track);
+
+      requestAnimationFrame(() => {
+        const overflowing = firstCopy.scrollWidth > element.clientWidth + 2;
+        element.classList.toggle('is-overflowing', overflowing);
+        element.classList.toggle('is-playing', state.isPlaying);
+      });
+    }
+
+    function refreshPlayerMarquee() {
+      [playerTitle, playerArtist].forEach(element => {
+        element.classList.toggle('is-playing', state.isPlaying);
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      setPlayerMarquee(playerTitle, playerTitle.dataset.trackText || '—');
+      setPlayerMarquee(playerArtist, playerArtist.dataset.trackText || '—');
+    });
+
     /* ============================================================
        PLAYBACK
        ============================================================ */
@@ -1222,10 +1358,11 @@
       state.currentSongIndex = index;
 
       audio.src = song.audioUrl;
-      playerTitle.textContent = song.title;
-      playerArtist.textContent = song.artist;
-      playerArt.innerHTML = `<i class="fas ${song.artIcon}"></i>`;
+      setPlayerMarquee(playerTitle, song.title);
+      setPlayerMarquee(playerArtist, song.artist);
+      playerArt.innerHTML = `<img src="karthikai.jpg" alt="Karthikai flower">`;
       playerArt.classList.toggle('spinning', autoplay);
+      refreshPlayerMarquee();
       totalDurationEl.textContent = song.duration;
 
       if (autoplay) {
@@ -1253,6 +1390,7 @@
         }
         updatePlayPauseIcon();
         playerArt.classList.toggle('spinning', state.isPlaying);
+        refreshPlayerMarquee();
         updateCardPlayingStates();
         renderMusicGrid();
         return;
@@ -1336,6 +1474,7 @@
       state.isPlaying = true;
       updatePlayPauseIcon();
       playerArt.classList.add('spinning');
+      refreshPlayerMarquee();
       updateCardPlayingStates();
     });
 
@@ -1343,6 +1482,7 @@
       state.isPlaying = false;
       updatePlayPauseIcon();
       playerArt.classList.remove('spinning');
+      refreshPlayerMarquee();
       updateCardPlayingStates();
     });
 
@@ -1451,7 +1591,9 @@
         const item = document.createElement('div');
         item.className = 'download-item';
         item.innerHTML = `
-          <div class="dl-art"><i class="fas ${song.artIcon}"></i></div>
+         <div class="dl-art">
+  <img src="karthikai.jpg" alt="Karthikai flower">
+</div>
           <div class="dl-info">
             <div class="dl-title">${song.title}</div>
             <div class="dl-artist">${song.artist}</div>
@@ -1510,9 +1652,6 @@
     prevBtn.addEventListener('click', playPrev);
     nextBtn.addEventListener('click', playNext);
 
-    exploreBtn.addEventListener('click', () => {
-      document.getElementById('musicSection').scrollIntoView({ behavior: 'smooth' });
-    });
 
     /* ============================================================
        KEYBOARD SHORTCUTS
@@ -1532,23 +1671,41 @@
     /* ============================================================
        INIT
        ============================================================ */
-    function init() {
-      renderMusicGrid();
-      renderDownloads();
-      audio.volume = 0.7;
-      updateVolumeIcon();
+ 
 
-      const first = SONGS[0];
-      playerTitle.textContent = first.title;
-      playerArtist.textContent = first.artist;
-      playerArt.innerHTML = `<i class="fas ${first.artIcon}"></i>`;
-      totalDurationEl.textContent = first.duration;
-      state.currentSongIndex = 0;
+async function init() {
+  renderMusicGrid();
+  renderDownloads();
 
-      showToast('Welcome to NEBULA — tap any song to play', 'fa-music');
-    }
+  audio.volume = 0.7;
+  updateVolumeIcon();
 
-    init();
+  const openingSong = SONGS.find(song =>
+    song.title === 'Endless Journey' &&
+    song.artist === 'Path Finder'
+  );
+
+  if (!openingSong) {
+    showToast('Endless Journey was not found!', 'fa-exclamation-circle');
+    return;
+  }
+
+  // Load the selected song
+  loadSong(openingSong, false);
+
+  // Try autoplay
+  try {
+    await audio.play();
+  } catch (error) {
+    state.isPlaying = false;
+    updatePlayPauseIcon();
+    showToast('Tap PLAY to start Endless Journey', 'fa-info-circle');
+    console.log('Autoplay blocked:', error);
+  }
+}
+
+init();
+
   </script>
 </body>
 </html>
