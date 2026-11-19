@@ -148,11 +148,11 @@
   margin: 0 auto;
 }
     .hero-title {
-      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
       text-align: center;
       font-weight: 800;
       letter-spacing: -0.04em;
-      line-height: 1.05;
+      line-height: 1.5;
       margin-bottom: 19px;
       background: linear-gradient(135deg, #ffffff 0%, var(--yellow) 55%, var(--red) 100%);
       -webkit-background-clip: text;
@@ -169,6 +169,10 @@
       font-weight: 400;
       letter-spacing: 0.01em;
       animation: heroFadeIn 1s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .sub{
+      font-size: 30px;
+      color: #ffcc33;
     }
     @keyframes heroFadeIn {
       from { opacity: 0; transform: translateY(28px); }
@@ -306,10 +310,11 @@
       margin-bottom: 30px;
     }
     .section-header h2 {
-      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-size: clamp(1.5rem, 1.5vw, 1rem);
       font-weight: 800;
       letter-spacing: -0.025em;
       color: var(--text-primary);
+      text-align: center;
     }
     .section-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .btn-secondary {
@@ -925,6 +930,37 @@
       0%   { transform: translate(0, 0) scale(1); }
       100% { transform: translate(40px, -50px) scale(1.15); }
     }
+    /* FOOTER IMAGE BANNER */
+.footer-banner {
+  width: 100%;
+  margin: 20px auto 0;
+  padding: 0;
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-banner img {
+  display: block;
+  width: 100%;
+  padding: 0;
+  height: auto;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .footer-banner {
+    margin-top: 15px;
+  }
+
+  .footer-banner img {
+    width: 100%;
+    height: auto;
+  }
+}
 
     /* ============================================================
        RESPONSIVE
@@ -1061,7 +1097,7 @@
   <div class="hero-content">
     <h1 class="hero-title">வீரத்தின் வித்துக்கள்</h1>
     <p class="hero-subtitle">
-      |  பாகம் - 2    |    2026|
+      |  பாகம் - 3    |    2026 |
     </p>
   </div>
 </section>
@@ -1070,7 +1106,7 @@
     <!-- MUSIC COLLECTION -->
     <section class="music-section" id="musicSection">
       <div class="section-header">
-        <h2>Midnight Collection</h2>
+        <h2><span class="sub">வரிகள்</span> </br>| துளசிச்செல்வன் | உரும்பையூரான் | மாவீரன் | சுடரவன் | சுடர்விழி | நிலாமதி |</h2>
         <div class="section-actions">
           <button id="sortBtn" class="btn-secondary"><i class="fas fa-sort"></i> Sort by Title</button>
           <button id="filterFavBtn" class="btn-secondary"><i class="fas fa-heart"></i> Favorites</button>
@@ -1121,10 +1157,17 @@
         </div>
       </div>
     </div>
+
+    
   </footer>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <audio id="audioPlayer"></audio>
+
+  <!-- FOOTER IMAGE BANNER -->
+<footer class="footer-banner">
+  <img src="banner.png" alt="வீரத்தின் வித்துக்கள் — Footer Banner">
+</footer>
 
   <!-- ============================================================
        JAVASCRIPT
@@ -1136,32 +1179,33 @@
        const ART_IMAGE = 'karthikai.jpg';
 
 const SONGS = [
-  { id: 1, title: 'Midnight Dreams', artist: 'Aurora Lane', duration: '3:42', artIcon: ART_IMAGE,
-    audioUrl: 'Poovoodu Kathei 2TRK_Master_wav.wav', filename: 'midnight-dreams.wav' },
+  
+{ id: 3, title: 'கழுத்தில் நஞ்சைக்கட்டிக்கொண்டு..', artist: 'வரிகள்: கவிஞர் துளசிச்செல்வன் </br> பாடியவர்: இசைப்பறவை கரோலின் </br> இசை: ஐவறி அகஸ்ரின்', duration: '4:15', artIcon: ART_IMAGE,
+    audioUrl: 'களுத்தில்  நஞ்சை.mp3', filename: 'களுத்தில்  நஞ்சை.mp3' },
 
-  { id: 2, title: 'Neon Lights', artist: 'Neon Pulse', duration: '2:58', artIcon: ART_IMAGE,
-    audioUrl: 'VIDUDHALAI SOORIYAN MIX 2.wav', filename: 'neon-lights.wav' },
+  { id: 2, title: 'சுடரேற்றுவோம்', artist: 'பாடியவர்: தமிழிசை, சுடர்செழியன்</br>பாடலாரிசியர்:  சுடர்விழி', duration: '2:58', artIcon: ART_IMAGE,
+    audioUrl: 'சுடரேற்றுவோம் நினைவுச் சுடர்  ஏற்றுவோம்.mp3', filename: 'சுடரேற்றுவோம் நினைவுச் சுடர்  ஏற்றுவோம்.mp3' },
 
-  { id: 3, title: 'Lost in Paradise', artist: 'Velvet Sky', duration: '4:15', artIcon: ART_IMAGE,
-    audioUrl: 'களுத்தில் நஞ்சை.wav', filename: 'lost-in-paradise.wav' },
+  
+    { id: 1, title: 'வீரத் தலைவனே வீரவணக்கம்...', artist: 'பாடலாசிரியர்: துளசிச்செல்வன்</br>இசை: மாவீரன்.</br>பாடியது: சித்தன் ஜெயமூர்த்தி மற்றும் குழுவினர்.', duration: '3:12', artIcon: ART_IMAGE,
+    audioUrl: 'வீரத் தலைவனே வீரவணக்கம்.mp3', filename: 'வீரத் தலைவனே வீரவணக்கம்.mp3' },
 
-  { id: 4, title: 'Ocean Waves', artist: 'Blue Horizon', duration: '3:21', artIcon: ART_IMAGE,
-    audioUrl: 'சுடரேற்றுவோம் நினைவுச் சுடர் ஏற்றுவோம்.wav', filename: 'ocean-waves.wav' },
+  { id: 4, title: 'விடுதலைச்சூரியன் வீழ்ந்ததுவோ...', artist: 'பாடியவர்: கரிசரண்</br>பாடலாசிரியர்: சுடரவன்', duration: '3:21', artIcon: ART_IMAGE,
+    audioUrl: 'விடுதலைச்  சூரியன் வீழ்ந்ததுவோ.mp3', filename: 'விடுதலைச்சூரியன் வீழ்ந்ததுவோ.mp3' },
 
   { id: 5, title: 'தேசத்தை நேசித்த தேசியவீரர்கள்..', artist: 'வரிகள் - உரும்பையூரான் </br> பாடியவர்கள் - இசைப்பறவை கரோலின் </br> V.s ஜெயன்  </br> இசை-ஐவறி அகஸ்ரின்.', duration: '3:05', artIcon: ART_IMAGE,
-    audioUrl: 'தேசத்தை நேசித்த.wav', filename: 'electric-heart.wav' },
+    audioUrl: 'தேசத்தை நேசித்த தேசியவீரர்கள்.mp3', filename: 'தேசத்தை நேசித்த தேசியவீரர்கள்.mp3' },
 
-  { id: 6, title: 'Moonlight Vibes', artist: 'Lunar Echo', duration: '3:50', artIcon: ART_IMAGE,
-    audioUrl: 'புலர்கின்ற பொழுதெல்லாம் தலைவா.wav', filename: 'moonlight-vibes.wav' },
+  { id: 6, title: 'புலர்கின்ற பொழுதெல்லாம் தலைவா…: ', artist: 'பாடலாசிரியர்: நிலாமதி</br>பாடியவர்: இசைப்பறவை கரோலின்</br>இசை: ஜவரி அகஷ்ரின்', duration: '3:50', artIcon: ART_IMAGE,
+    audioUrl: 'புலர்கின்ற பொழுதெல்லாம் தலைவா.mp3', filename: 'புலர்கின்ற பொழுதெல்லாம் தலைவா.mp3' },
 
-  { id: 7, title: 'Endless Journey', artist: 'Path Finder', duration: '4:33', artIcon: ART_IMAGE,
-    audioUrl: 'வீரமா கடலே.wav', filename: 'endless-journey.wav' },
+  { id: 7, title: 'வீரவணக்கம் வீரவணக்கம்...', artist: 'பாடியவர்கள்: இசைப்பறவை கரோலின்,</br>V.s ஜெயன் </br> இசை: ஐவறி அகஸ்ரின்', duration: '4:33', artIcon: ART_IMAGE,
+    audioUrl: 'வீரவணக்கம்  வீரவணக்கம்-.mp3', filename: 'வீரவணக்கம் வீரவணக்கம்.mp3' },
 
-  { id: 8, title: 'Golden Memories', artist: 'Summer Gold', duration: '3:12', artIcon: ART_IMAGE,
-    audioUrl: 'வீரவணக்கம் வீரவணக்கம்.wav', filename: 'golden-memories.wav' },
+  { id: 8, title: 'வீரமாகடலே...', artist: 'பாடியவர்: சுடர்ச்செழியன்</br>பாடலாசிரியர் : துளசிச்செல்வன்</br>இசை: ஜவரி அகஷ்ரின்நிலாமதி', duration: '3:12', artIcon: ART_IMAGE,
+    audioUrl: 'வீரமா கடலே.mp3', filename: 'வீரமா கடலே.mp3' }
 
-    { id: 9, title: 'Golden Memories', artist: 'Summer Gold', duration: '3:12', artIcon: ART_IMAGE,
-    audioUrl: 'வீரவணக்கம் வீரவணக்கம்.wav', filename: 'golden-memories.wav' }
+    
 ];
     /* ============================================================
        STATE
@@ -1681,8 +1725,8 @@ async function init() {
   updateVolumeIcon();
 
   const openingSong = SONGS.find(song =>
-    song.title === 'Endless Journey' &&
-    song.artist === 'Path Finder'
+    song.title === 'வீரத் தலைவனே வீரவணக்கம்...' &&
+    song.artist === 'பாடலாசிரியர்: துளசிச்செல்வன்</br>இசை: மாவீரன்.</br>பாடியது: சித்தன் ஜெயமூர்த்தி மற்றும் குழுவினர்.'
   );
 
   if (!openingSong) {
@@ -1699,7 +1743,7 @@ async function init() {
   } catch (error) {
     state.isPlaying = false;
     updatePlayPauseIcon();
-    showToast('Tap PLAY to start Endless Journey', 'fa-info-circle');
+    showToast('Tap PLAY to start வீரத் தலைவனே வீரவணக்கம்...', 'fa-info-circle');
     console.log('Autoplay blocked:', error);
   }
 }
